@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Stg-FL-s2G">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoTableViewCell" rowHeight="88" id="zDU-DG-McP" customClass="TodoTableViewCell" customModule="TODO_ios" customModuleProvider="target">
@@ -60,17 +60,44 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fmT-eo-G1a">
+                                <rect key="frame" x="10" y="48" width="394" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53K-4G-Poa">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="53K-4G-Poa" secondAttribute="height" id="XVn-5l-fma"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="addButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q05-Mu-ubt"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a todo ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NRq-wH-J1R">
+                                        <rect key="frame" x="44" y="0.0" width="350" height="40"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="cV7-OT-D0j"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Stg-FL-s2G" secondAttribute="trailing" id="2JD-98-SDp"/>
-                            <constraint firstItem="Stg-FL-s2G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="O28-Q6-sKB"/>
+                            <constraint firstItem="Stg-FL-s2G" firstAttribute="top" secondItem="fmT-eo-G1a" secondAttribute="bottom" constant="4" id="4fx-k6-7Gq"/>
+                            <constraint firstItem="fmT-eo-G1a" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="5qc-by-TOW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fmT-eo-G1a" secondAttribute="trailing" constant="10" id="Sfw-Bh-7XL"/>
                             <constraint firstItem="Stg-FL-s2G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TRI-0h-RFV"/>
+                            <constraint firstItem="fmT-eo-G1a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="WRl-UL-pEi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Stg-FL-s2G" secondAttribute="bottom" id="q5J-Tb-k0J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="inputTextFiled" destination="NRq-wH-J1R" id="eje-GF-fai"/>
                         <outlet property="tableView" destination="Stg-FL-s2G" id="ObZ-l0-OQ5"/>
                     </connections>
                 </viewController>

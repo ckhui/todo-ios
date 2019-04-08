@@ -6,5 +6,6 @@ target 'TODO-ios' do
   use_frameworks!
 
   # Pods for TODO-ios
+  pod 'Alamofire', '~> 5.0.0-beta.3'
 
 end

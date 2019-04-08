@@ -21,7 +21,7 @@ class TodoTableViewCell: UITableViewCell {
 
 
 
-    var todoItem : Todo = Todo(title: "", isCheck: false)
+    var todoItem : Todo = Todo(id: 0, title: "", isCheck: false)
     var index : IndexPath = IndexPath(item: 0, section: 0)
     var delegate: TodoTableViewCellDelegate?
 
