@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            tableView.delegate = self
             tableView.estimatedRowHeight = 65
             tableView.rowHeight = UITableView.automaticDimension
             tableView.allowsSelection = false
@@ -30,6 +31,8 @@ class ViewController: UIViewController {
         }) { (err) in
             self.alert(err)
         }
+
+        APIRouter.share.listen()
     }
 
 
@@ -50,7 +53,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController : UITableViewDataSource {
+extension ViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.todos.count
     }
@@ -63,6 +66,23 @@ extension ViewController : UITableViewDataSource {
         cell.delegate = self
         cell.setup(item: t, index: indexPath)
         return cell
+    }
+
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let t = todos[indexPath.row]
+            APIRouter.share.deleteTodo(id: t.id, success: {
+                self.todos.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .left)
+            }) { (err) in
+                self.alert(err)
+            }
+        }
     }
 }
 

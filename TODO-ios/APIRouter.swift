@@ -149,6 +149,7 @@ enum Endpoint: URLRequestConvertible {
     case changeTitle(id: Int, title: String)
     case changeCompleted(id: Int, completed: Bool)
     case delete(id: Int)
+    case events
 
     var path: String {
         switch self {
@@ -162,6 +163,8 @@ enum Endpoint: URLRequestConvertible {
             return "task/\(id)/"
         case .delete(let id):
             return "task/\(id)/"
+        case .events:
+            return "events/"
         }
     }
 
@@ -177,6 +180,8 @@ enum Endpoint: URLRequestConvertible {
             return .put
         case .delete:
             return .delete
+        case .events:
+            return .get
         }
     }
     var params: Parameters {
@@ -190,6 +195,8 @@ enum Endpoint: URLRequestConvertible {
         case .changeCompleted(_, let completed):
             let bool = completed == true ? "True" : "False"
             return ["completed": bool]
+        case .events:
+            return [:]
         }
     }
 
@@ -199,6 +206,10 @@ enum Endpoint: URLRequestConvertible {
         urlRequest.timeoutInterval = 5
         urlRequest.httpMethod = method.rawValue
         urlRequest = try URLEncoding.default.encode(urlRequest, with: self.params)
+
+        if case Endpoint.events = self {
+            urlRequest.addValue("text/event-stream", forHTTPHeaderField: "Content-Type")
+        }
         return urlRequest
     }
 }
