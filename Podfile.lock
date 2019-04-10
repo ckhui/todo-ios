@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (5.0.0-beta.4)
+  - EventSource (1.0.4)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.3)
+  - EventSource
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - EventSource
 
 SPEC CHECKSUMS:
   Alamofire: 6458d95477bc40adf10129f22c67cfb014162dc8
+  EventSource: f7a143f7d87592a4adf2a8545bdb10701b5acf0e
 
-PODFILE CHECKSUM: b1abfae4cfaec118cbf6b806aa45fc1e780b55b5
+PODFILE CHECKSUM: 79b872b906cdfe5c0d24922af53b99466ccc9334
 
 COCOAPODS: 1.6.1

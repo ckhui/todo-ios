@@ -22,23 +22,23 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoTableViewCell" rowHeight="88" id="zDU-DG-McP" customClass="TodoTableViewCell" customModule="TODO_ios" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="88"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoTableViewCell" rowHeight="44" id="zDU-DG-McP" customClass="TodoTableViewCell" customModule="TODO_ios" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zDU-DG-McP" id="b5D-p5-bn1">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="87.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zDU-DG-McP" id="b5D-p5-bn1">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dN3-Vn-ko4" customClass="UIButtonCheckBox" customModule="TODO_ios" customModuleProvider="target">
-                                                    <rect key="frame" x="30" y="21" width="35" height="35"/>
+                                                    <rect key="frame" x="30" y="8" width="35" height="27.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="35" id="MXU-Ad-N2I"/>
-                                                        <constraint firstAttribute="height" constant="35" id="dZe-nQ-GMa"/>
+                                                        <constraint firstAttribute="width" priority="999" constant="35" id="MXU-Ad-N2I"/>
+                                                        <constraint firstAttribute="height" priority="999" constant="35" id="dZe-nQ-GMa"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXX" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f1n-ow-vKC">
-                                                    <rect key="frame" x="75" y="30" width="279" height="17"/>
+                                                    <rect key="frame" x="75" y="13.5" width="279" height="17"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -46,9 +46,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dN3-Vn-ko4" firstAttribute="leading" secondItem="b5D-p5-bn1" secondAttribute="leadingMargin" constant="10" id="0Re-PT-4tN"/>
-                                                <constraint firstItem="dN3-Vn-ko4" firstAttribute="top" secondItem="b5D-p5-bn1" secondAttribute="topMargin" constant="10" id="7Cr-c9-YeK"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="f1n-ow-vKC" secondAttribute="trailing" constant="40" id="7bC-Yf-Rmk"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="dN3-Vn-ko4" secondAttribute="bottom" constant="10" id="Dwj-eS-qSZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="dN3-Vn-ko4" secondAttribute="bottom" constant="8" id="Yl1-0l-uoD"/>
+                                                <constraint firstItem="dN3-Vn-ko4" firstAttribute="top" secondItem="b5D-p5-bn1" secondAttribute="top" constant="8" id="ZvP-T2-fgP"/>
                                                 <constraint firstItem="f1n-ow-vKC" firstAttribute="centerY" secondItem="dN3-Vn-ko4" secondAttribute="centerY" id="p1T-RC-sGC"/>
                                                 <constraint firstItem="f1n-ow-vKC" firstAttribute="leading" secondItem="dN3-Vn-ko4" secondAttribute="trailing" constant="10" id="vzL-R2-DUc"/>
                                             </constraints>

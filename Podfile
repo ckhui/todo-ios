@@ -7,5 +7,6 @@ target 'TODO-ios' do
 
   # Pods for TODO-ios
   pod 'Alamofire', '~> 5.0.0-beta.3'
+  pod 'EventSource'
 
 end

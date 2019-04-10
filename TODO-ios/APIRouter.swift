@@ -143,6 +143,7 @@ class APIRouter: NSObject {
 
 enum Endpoint: URLRequestConvertible {
     static let baseURLString = "http://127.0.0.1:8000/api/v1/"
+    static let sseURL = URL(string: "http://127.0.0.1:8000/api/v1/events/")
 
     case getAll
     case create(title: String)

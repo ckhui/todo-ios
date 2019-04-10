@@ -20,3 +20,12 @@ extension ViewController {
         self.present(alert, animated: true, completion: completion)
     }
 }
+
+
+extension String {
+    func toJson() -> [String: Any]? {
+        guard let data = self.data(using: .utf8)
+            else { return nil }
+        return try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+    }
+}

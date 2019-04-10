@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import EventSource
 
 class ViewController: UIViewController {
 
     var todos : [Todo] = []
+    let eventSource: EventSource =  EventSource(url: Endpoint.sseURL)
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -32,7 +34,61 @@ class ViewController: UIViewController {
             self.alert(err)
         }
 
-        APIRouter.share.listen()
+        setupSSE()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        eventSource.close()
+    }
+
+
+    func setupSSE(){
+        eventSource.onOpen({ (event) in
+            print("Open Connection")
+        })
+
+        eventSource.onError { (error) in
+            self.alert(error?.description)
+        }
+
+        eventSource.onMessage { (event) in
+            guard let e = event
+                else { return }
+            let todoEvent = TodoEvent(e)
+            guard let t = todoEvent.todo
+            else { return }
+
+            switch (todoEvent.type) {
+            case "new":
+                self.todos.append(t)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case "edit":
+                guard let i = self.todos.firstIndex(where: { (item) -> Bool in
+                    item.id == t.id
+                })
+                    else { return }
+                self.todos[i] = t
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [IndexPath(item: i, section: 0)], with: .fade)
+                }
+            case "delete":
+                guard let i = self.todos.firstIndex(where: { (item) -> Bool in
+                    item.id == t.id
+                })
+                    else { return }
+                self.todos.remove(at: i)
+                DispatchQueue.main.async {
+                    self.tableView.deleteRows(at: [IndexPath(item: i, section: 0)], with: .left)
+                }
+            default:
+                return
+            }
+
+
+        }
     }
 
 
@@ -45,8 +101,8 @@ class ViewController: UIViewController {
         }
         APIRouter.share.addTodo(title: text, success: { (item) in
             self.inputTextFiled.text = ""
-            self.todos.append(item)
-            self.tableView.reloadData()
+//            self.todos.append(item)
+//            self.tableView.reloadData()
         }) { (err) in
             self.alert(err)
         }
@@ -77,8 +133,8 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             let t = todos[indexPath.row]
             APIRouter.share.deleteTodo(id: t.id, success: {
-                self.todos.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .left)
+//                self.todos.remove(at: indexPath.row)
+//                self.tableView.deleteRows(at: [indexPath], with: .left)
             }) { (err) in
                 self.alert(err)
             }
@@ -89,9 +145,9 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
 extension ViewController : TodoTableViewCellDelegate {
     func didChangeCheckStatus(index: IndexPath, item: Todo) {
         APIRouter.share.editTodoCompleteState(id: item.id, isCheck: item.isCheck, success: { (todo) in
-            //success
-            print("Backend: \(todo.isCheck) : \(todo.title)")
-            print("Store: \(item.isCheck) : \(item.title)")
+//            //success
+//            print("Backend: \(todo.isCheck) : \(todo.title)")
+//            print("Store: \(item.isCheck) : \(item.title)")
         }) { (err) in
             self.alert(err)
         }
@@ -100,6 +156,3 @@ extension ViewController : TodoTableViewCellDelegate {
 
     
 }
-
-
-

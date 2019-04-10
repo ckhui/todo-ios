@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EventSource
 
 class Todo {
     var id: Int
@@ -22,13 +23,40 @@ class Todo {
     convenience init?(json: [String: Any]) {
         guard
             let id = json["id"] as? Int,
-            let title = json["title"] as? String,
-            let isCheck = json["completed"] as? Bool
-            else { return nil}
-        self.init(id: id, title: title, isCheck: isCheck)
+            let title = json["title"] as? String
+        else { return nil}
+
+        var isCheckBool : Bool
+        if let isCheckStr = json["completed"] as? String {
+            if isCheckStr == "True" {
+                isCheckBool = true
+            } else if isCheckStr == "False" {
+                isCheckBool = false
+            } else {
+                return nil
+            }
+        } else if let isCheck = json["completed"] as? Bool {
+            isCheckBool = isCheck
+        } else {
+            return nil
+        }
+        self.init(id: id, title: title, isCheck: isCheckBool)
     }
 
     func changeCheckStatus(_ b: Bool) {
         self.isCheck = b
+    }
+}
+
+
+struct TodoEvent {
+    var type: String
+    var todo: Todo?
+
+    init(_ e: Event) {
+        self.type = e.event
+        if let json =  e.data.toJson() {
+            self.todo = Todo(json: json)
+        }
     }
 }
